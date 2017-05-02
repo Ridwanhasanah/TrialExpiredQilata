@@ -17,14 +17,17 @@ function rhnotice() {
 
 	$blogs_id = get_current_blog_id();
 	$user_id  = get_current_user_id();
-	$atau = 13 || $user_id == 1;
 
 	global $wpdb;
 	$table = $wpdb->prefix."blogs";
 
 	$users = $wpdb->get_results("SELECT registered FROM wp_blogs WHERE blog_id = $blogs_id ");
+	$domain = $wpdb->get_results("SELECT domain FROM wp_blogs WHERE blog_id = $blogs_id ");
+	$qilatab = 'qd';
+	$qilata = 'www.qilata.com';
+	$checkdomain = strpos($domain,$qilatab);
 
-	if ($blogs_id == 36 ||$blogs_id == 37||$blogs_id == 39 ||$blogs_id == 40||$blogs_id == 41||$blogs_id == 42||$blogs_id == 43||$blogs_id == 44||$blogs_id == 45||$blogs_id == 46||$blogs_id == 47) {
+	if ($qilatab == $checkdomain || $qilata) { //chek domain punya siapa
 		?>
 		<div id="message" class="error notice notice-error is-dismissible">
 			<p><?php _e( 'Ini WEBSITE QILATA.', 'sample-text-domain' ); ?></p>
