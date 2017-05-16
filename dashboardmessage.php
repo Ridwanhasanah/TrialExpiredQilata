@@ -48,7 +48,7 @@ function rhnotice() {
 			}else{
 				?>
 				<div id="message" class="error notice notice-error is-dismissible">
-					<p><strong><a href="http://www.qilata.com/paket/" target="_blank"><?php _e( 'Masa Trial Anda '.$selisih.' lagi, Upgrade sekarang Klik di sini !!! .', 'sample-text-domain' ); ?></a></strong></p>
+					<p><strong><a href="http://localhost/https:/demo1/dddd/paket/" target="_blank"><?php _e( 'Masa Trial Anda '.$selisih.' lagi, Upgrade sekarang Klik di sini !!! .', 'sample-text-domain' ); ?></a></strong></p>
 				</div>
 				<?php
 			}

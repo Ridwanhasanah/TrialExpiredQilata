@@ -12,9 +12,16 @@
 
 /*========== Nottice Expired Trial ==========*/
 
-require_once 'dashboardmessage.php';
-require_once 'upgradeweb.php';
+require_once ( plugin_dir_path(__FILE__ ) . 'dashboardmessage.php');
+require_once ( plugin_dir_path(__FILE__ ) .'upgradeweb.php' );
 
+function r_css_js(){
 
+	//global $pagenow,$$typenow;
 
+	wp_enqueue_style(' rcss', plugins_url('asset/css/rstyle.css', __FILE__ ));
+	//wp_enqueue_style('rcss' );
+
+}
+add_action('wp_enqueue_scripts', 'r_css_js' );
 ?>

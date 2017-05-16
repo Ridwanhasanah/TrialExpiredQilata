@@ -1,71 +1,9 @@
 <?php
-wp_enqueue_style('style', get_template_directory_uri() . 'css/style.css' );
+require_once 'upgradeweb.php';
 
-
-
-/*===== Kirim Harga Paket =====*/
-function rh_pilih_paket(){
-
-	
-	/*===== Menampilkan email =====*/
-	global $wpdb;
-	$user_id  = get_current_user_id();
-
-	$user_email = $wpdb->get_results("SELECT user_email FROM wp_users WHERE ID = $user_id");
-	$umail = $user_email[0]->user_email;
-	$user_login = $wpdb->get_results("SELECT user_login FROM wp_users WHERE ID = $user_id");
-	$ulog = $user_login[0]->user_login;
-
-
-	$dbemail = $wpdb->get_results("SELECT * FROM wp_upgrade WHERE user_email = '$umail';");
-		
-/*========== Menampilkan User dan Email Custoomer =========*/
-	if ($user_id) {
-
-    ?>
-    <p><b>User Name  : <?= $ulog;?></b></p>
-    <p><b>User Email : <?= $umail; ?></b></p>
-    <br>
-    <?php
-	}
-/* ======= include file PageUpgrade.php ========*/
-require_once 'PageUpgrade.php';
-	
-	if (isset($_POST['upgrade'])) {
-  		global $wpdb;
-
-  		$hp = $_POST['hp'];
-  		$harga=$_POST['rd'];
-
-
-  		if (!empty($dbemail)) {
-  			echo "<b>Anda Telah menupgrade sebelumnya</b>";
-  		}elseif(strlen($hp) == 0 ){
-  			?>
-  			
-  			<p><strong> Maaf Nomor Handphone belum di isi. </strong></p>
-  			
-  			<?php
-  		}elseif(strlen($hp) < 11){
-        ?><p><strong> Maaf Nomor Handphone Tidak Valid. </strong></p><?php
-      }else{
-
-
-  			if (isset($harga)){
-
-  				
-				//require_once '/template/emailtemplate.php';
-				//global $message;
-
-				$datenow = date_default_timezone_set('Asia/Jakarta');
-				$datenow = date("d F Y");
-  				$ID = substr( md5(rand()), 0, 10);
-          
-  				$subject = "Pembayaran Upgrade Paket Qilata";
-
-  				/*==================== Content Email =========================*/
-  				$body = 
-  				'
+$datenow = date("d-m-Y H:i:s");
+$message = 
+'
 <html>
    <head>
       <style>
@@ -141,13 +79,13 @@ require_once 'PageUpgrade.php';
                                                                   <tr>
                                                                      <td align="center" width="100%" style="padding: 0 15px;text-align: justify;color: rgb(76, 76, 76);font-size: 12px;line-height: 18px;">
                                                                         <h3 style="font-weight: 600; padding: 0px; margin: 0px; font-size: 16px; line-height: 24px; text-align: center;" class="title-color">Hi '.$ulog.',</h3>
-                                                                        <p style="margin: 20px 0 30px 0;font-size: 15px;text-align: left;"> Terima kasih anda telah melakukan upgrade paket. Tinggal selangkah lagi anda bisa memiliki website yang Elegant dan Profesional. 
+                                                                        <p style="margin: 20px 0 30px 0;font-size: 15px;text-align: center;">Terima kasih anda telah melakukan upgrade paket. Tinggal selangkah lagi anda bisa memiliki website yang Elegant dan Profesional. 
   				Silahkan lakukan pembayaran sejumlah:
   				'.$harga.'
-  				Transfer ke rekening bank berikut:<br><br>
+  				Transfer ke rekening bank berikut:<br>
   				<b>a.n ERDINI ENGGAR SETYAWATY<br>
   				BNI<br></b>
-  				<a href="#"><b>035-838-1432</b></a><br><br>
+  				<a href="#"><b>035-838-1432</b></a><br>
   				Silahkan klik tombol untuk konfirmasi</p>
                                                                         <div style="font-weight: 200; text-align: center; margin: 25px;"><a target="_blank" href="http://www.qilata.com/confirm/" style="padding:0.6em 1em;border-radius:600px;color:#ffffff;font-size:14px;text-decoration:none;font-weight:bold" class="button-color">Konfirmasi</a></div>
                                                                      </td>
@@ -211,43 +149,4 @@ require_once 'PageUpgrade.php';
    </body>
 </html>
 ';
-
-  				$headers[] = 'Billing@qilata.com <qilata@gmail.com>';
-  				$headers[] = "Content-Type: text/html; charset=UTF-8";
-
-  				wp_mail($umail, $subject, $body, $headers);
-
-  				/*======= Input data ke database =======*/
-  				$table = $wpdb->prefix."upgrade";
-  				$wpdb->query("INSERT INTO wp_upgrade ( user_name,user_email,hp,id_confirm,registered) 
-  					VALUES ('$ulog','$umail','$hp','$ID','');");
-  				?>
-          <script type="text/javascript">
-              alert('Silahkan Periksa Email Anda, Kami telah mengirim email Upgrade untuk Anda.');
-              window.location ="http://www.qilata.com";
-          </script>
-          <?php
-  			}
-  		}
-	}
-}
-
-add_shortcode('paket','rh_pilih_paket' );
-
-add_action( 'phpmailer_init', 'sent_mail' );
-function sent_mail( $phpmailer ) {
-    $phpmailer->isSMTP();
-    $phpmailer->Host = 'smtp.gmail.com';
-    $phpmailer->SMTPAuth = true; // Force it to use Username and Password to authenticate
-    $phpmailer->Port = 587;
-    $phpmailer->Username = 'qilata@gmail.com';
-    $phpmailer->Password = 'adminqilata17';
-
-    // Additional settings…
-    $phpmailer->SMTPSecure = "tls"; // Choose SSL or TLS, if necessary for your server
-    // $phpmailer->From = "you@yourdomail.com";
-    $phpmailer->FromName = "QILATA";
-}
-
-
 ?>
