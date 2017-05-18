@@ -29,7 +29,7 @@ function rh_pilih_paket(){
     <?php
 	}
 /* ======= include file PageUpgrade.php ========*/
-require_once 'PageUpgrade.php';
+require_once 'template/PageUpgrade.php';
 	
 	if (isset($_POST['upgrade'])) {
   		global $wpdb;

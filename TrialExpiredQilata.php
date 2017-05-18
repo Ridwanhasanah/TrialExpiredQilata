@@ -17,11 +17,10 @@ require_once ( plugin_dir_path(__FILE__ ) .'upgradeweb.php' );
 
 function r_css_js(){
 
-	//global $pagenow,$$typenow;
-
-	wp_enqueue_style(' rcss', plugins_url('asset/css/rstyle.css', __FILE__ ));
-	//wp_enqueue_style('rcss' );
+	wp_enqueue_style(' rcss', plugins_url('/asset/css/rstyle.css', __FILE__ ));
+	
 
 }
 add_action('wp_enqueue_scripts', 'r_css_js' );
+
 ?>
