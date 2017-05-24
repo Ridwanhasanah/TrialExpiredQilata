@@ -105,7 +105,7 @@ require_once 'template/PageUpgrade.php';
                                     <table border="0" cellspacing="0" cellpadding="0" style="font-weight:200;width:100%!important;font-family:Helvetica,Arial,sans-serif;min-width:100%!important" width="100%">
                                        <tbody>
                                           <tr>
-                                             <td align="left" valign="middle" width="50%"><span style="margin:0;color:#4c4c4c;white-space:normal;display:inline-block;text-decoration:none;font-size:12px;line-height:20px">ID Konfirmasi : '.$ID.'</span></td>
+                                             <td align="left" valign="middle" width="50%"><span style="margin:0;color:#f00;white-space:normal;display:inline-block;text-decoration:none;font-size:12px;line-height:20px"><b>ID Konfirmasi : '.$ID.'</b></span></td>
                                              <td valign="middle" width="50%" align="right" style="padding:0 0 0 10px"><span style="margin:0;color:#4c4c4c;white-space:normal;display:inline-block;text-decoration:none;font-size:12px;line-height:20px">'.$datenow.'</span></td>
                                              <td width="1">&nbsp;</td>
                                           </tr>
