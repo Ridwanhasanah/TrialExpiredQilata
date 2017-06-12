@@ -4,20 +4,20 @@ function rhnotice() {
 
 	$blogs_id = get_current_blog_id();
 	$user_id  = get_current_user_id();
-	$atau = 13 || $user_id == 1;
-
+	
 	global $wpdb;
 	$table = $wpdb->prefix."blogs";
+	//menamplikan data di field upgrade
+	$upgradeid = $wpdb->get_results("SELECT upgrade FROM wp_blogs WHERE blog_id = $blogs_id ");
+	
+	$upgrade = $upgradeid[0]->upgrade;/*menampilkan data dari array object*/
+	$qilata = 'qilata';
 
 	$users = $wpdb->get_results("SELECT registered FROM wp_blogs WHERE blog_id = $blogs_id ");
+	/*$id = $blogs_id == 1|| $blogs_id == 3 || $blogs_id == 36 ||$blogs_id == 37||$blogs_id == 39 ||$blogs_id == 40||$blogs_id == 41||$blogs_id == 42||$blogs_id == 43||$blogs_id == 44||$blogs_id == 45||$blogs_id == 46||$blogs_id == 47||$blogs_id ==54 ||$blogs_id == 55||$blogs_id ==56 ||$blogs_id == 57 ||$blogs_id == 58 ||$blogs_id == 59;*/
+	//require_once ( plugin_dir_path(__FILE__ ) . 'Id.php');
 
-	if ($blogs_id == 1 || $blogs_id == 36 ||$blogs_id == 37||$blogs_id == 39 ||$blogs_id == 40||$blogs_id == 41||$blogs_id == 42||$blogs_id == 43||$blogs_id == 44||$blogs_id == 45||$blogs_id == 46||$blogs_id == 47||$blogs_id ==54 ||$blogs_id == 55||$blogs_id ==56 ||$blogs_id == 57 ||$blogs_id == 58 ||$blogs_id == 59) { //check id blog
-		?>
-		<div id="message" class="error notice notice-error is-dismissible">
-			<p><?php _e( 'Ini WEBSITE QILATA.', 'sample-text-domain' ); ?></p>
-		</div>
-		<?php
-	}else{
+	if ($upgrade != $qilata) { //check field upgrade
 
 		if (!empty($users)){
 
@@ -48,13 +48,13 @@ function rhnotice() {
 			}else{
 				?>
 				<div id="message" class="error notice notice-error is-dismissible">
-					<p><strong><a href="http://localhost/https:/demo1/dddd/paket/" target="_blank"><?php _e( 'Masa Trial Anda '.$selisih.' lagi, Upgrade sekarang Klik di sini !!! .', 'sample-text-domain' ); ?></a></strong></p>
+					<p><strong><a href="http://localhost/https:/qilata/upgrade/" target="_blank"><?php _e( 'Masa Trial Anda '.$selisih.' lagi, Upgrade sekarang Klik di sini !!! .', 'sample-text-domain' ); ?></a></strong></p>
 				</div>
 				<?php
 			}
 
 		} else
-		echo 'gagal';
+		echo 'user tak terdekteksi';
 		
 
 	}

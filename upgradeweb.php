@@ -6,18 +6,18 @@ wp_enqueue_style('style', get_template_directory_uri() . 'css/style.css' );
 /*===== Kirim Harga Paket =====*/
 function rh_pilih_paket(){
 
+	/*===== Check Database =====*/
+  global $wpdb;
+  $user_id  = get_current_user_id();
+
+  $user_email = $wpdb->get_results("SELECT user_email FROM wp_users WHERE ID = $user_id");
+  $umail = $user_email[0]->user_email;
+  $user_login = $wpdb->get_results("SELECT user_login FROM wp_users WHERE ID = $user_id");
+  $ulog = $user_login[0]->user_login;
+
+
+  $dbemail = $wpdb->get_results("SELECT * FROM wp_upgrade WHERE user_email = '$umail';");
 	
-	/*===== Menampilkan email =====*/
-	global $wpdb;
-	$user_id  = get_current_user_id();
-
-	$user_email = $wpdb->get_results("SELECT user_email FROM wp_users WHERE ID = $user_id");
-	$umail = $user_email[0]->user_email;
-	$user_login = $wpdb->get_results("SELECT user_login FROM wp_users WHERE ID = $user_id");
-	$ulog = $user_login[0]->user_login;
-
-
-	$dbemail = $wpdb->get_results("SELECT * FROM wp_upgrade WHERE user_email = '$umail';");
 		
 /*========== Menampilkan User dan Email Custoomer =========*/
 	if ($user_id) {
@@ -30,17 +30,43 @@ function rh_pilih_paket(){
 	}
 /* ======= include file PageUpgrade.php ========*/
 require_once 'template/PageUpgrade.php';
-	
-	if (isset($_POST['upgrade'])) {
-  		global $wpdb;
 
-  		$hp = $_POST['hp'];
-  		$harga=$_POST['rd'];
+if (isset($_POST['paket1'])) {
+  RHSendEmail();
+}elseif (isset($_POST['paket1'])) {
+  RHSendEmail();
+}elseif (isset($_POST['paket1'])) {
+  RHSendEmail();
+}
+}	
+	/*if (isset($_POST['upgrade'])) {*/
+    function RHSendEmail(){
+      global $wpdb;
+
+  $user_id  = get_current_user_id();
+
+  $user_email = $wpdb->get_results("SELECT user_email FROM wp_users WHERE ID = $user_id");
+  $umail = $user_email[0]->user_email;
+  $user_login = $wpdb->get_results("SELECT user_login FROM wp_users WHERE ID = $user_id");
+  $ulog = $user_login[0]->user_login;
+
+  $user_phone = $wpdb->get_results("SELECT user_phone FROM wp_users WHERE ID = $user_id");
+  $uphone = $user_phone[0]->user_phone;
+
+
+  $dbemail = $wpdb->get_results("SELECT * FROM wp_upgrade WHERE user_email = '$umail';");
+
+    if ($user_id) {
+      
+  		
+
+  		//$hp = $_POST['hp'];
+  		$harga= $_POST['harga']; //$_POST['rd'];
 
 
   		if (!empty($dbemail)) {
   			echo "<b>Anda Telah menupgrade sebelumnya</b>";
-  		}elseif(strlen($hp) == 0 ){
+  		}/*elseif(strlen($hp) == 0 ){
   			?>
   			
   			<p><strong> Maaf Nomor Handphone belum di isi. </strong></p>
@@ -48,7 +74,7 @@ require_once 'template/PageUpgrade.php';
   			<?php
   		}elseif(strlen($hp) < 11){
         ?><p><strong> Maaf Nomor Handphone Tidak Valid. </strong></p><?php
-      }else{
+      }*/else{
 
 
   			if (isset($harga)){
@@ -73,14 +99,14 @@ require_once 'template/PageUpgrade.php';
          background-color: #eb681f;
          }
          .title-color {
-         color: #0066cc;
+         color: #00B9EB;
          }
          .button-color {
-         background-color: #0066cc;
+         background-color: #00B9EB;
          }
          @media screen and (min-width: 500px) {
          .banner-color {
-         background-color: #0066cc;
+         background-color: #00B9EB;
          }
          .title-color {
          color: #eb681f;
@@ -220,7 +246,7 @@ require_once 'template/PageUpgrade.php';
   				/*======= Input data ke database =======*/
   				$table = $wpdb->prefix."upgrade";
   				$wpdb->query("INSERT INTO wp_upgrade ( user_name,user_email,hp,id_confirm,registered) 
-  					VALUES ('$ulog','$umail','$hp','$ID','');");
+  					VALUES ('$ulog','$umail','$uphone','$ID','');");
   				?>
           <script type="text/javascript">
               alert('Silahkan Periksa Email Anda, Kami telah mengirim email Upgrade untuk Anda.');
@@ -229,8 +255,9 @@ require_once 'template/PageUpgrade.php';
           <?php
   			}
   		}
+    }
 	}
-}
+
 
 add_shortcode('paket','rh_pilih_paket' );
 

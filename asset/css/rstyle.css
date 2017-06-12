@@ -1,4 +1,8 @@
-
+.lebar{
+	width: 1100px;
+	padding: 0px 70px !important;
+	text-align: center;
+}
 .rad:hover{
 	padding: 10px 5px 5px 5px;
 	background: #fff;
@@ -18,7 +22,7 @@
 	background: #f3f3f3;
 	text-align: center; 
 	font-size: 18px;
-	padding: 30px 95px;
+	padding: 30px 0px;
 	color: #fff;
 }
 .paket{
@@ -28,13 +32,14 @@
 	border-radius: 5px 5px 0 0;
 	color: #fff;
 	font-size: 25px !important;
-	padding: 10px 0; 
+	padding: 30px 0; 
 
 }
 .pharga{
 	list-style:none;
 	background: #EBEBEB; 
 	text-align: center;
+	padding: 30px 0px;
 	
 }
 .pharga li b {
@@ -68,15 +73,15 @@ input[type=number]
 	border-radius: 5px 5px !important;
 }
 
-input[type=submit] {
+/* input[type=submit] {
     background: #fff;
-    background-color: #00B9EB !important; 
-    border: 1px solid #00B9EB !important;
+    background-color: #36ACD5 !important; 
+    border: 1px solid #36ACD5 !important;
     color: #000;
     margin: 4px 10px;
     padding: 0px !important;
     height: 40px !important;
-    width: 250px ;
+    width: 100px ;
     border-radius: 5px 5px !important;
 
 }
@@ -88,6 +93,6 @@ input[type=submit]:hover {
     margin: 4px 10px;
     padding: 5px;
     height: 40px !important;
-    width: 250px ;
+    width: 100px ;
     border-radius: 5px 5px !important;
-}
+} */
